@@ -6,12 +6,12 @@ This project is to help you with the following:
 
 Using SQLite or PostgreSQL database comment/uncomment the corresponding section of the settings.py 
 ...
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+\# DATABASES = {
+\#     'default': {
+\#         'ENGINE': 'django.db.backends.sqlite3',
+\#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+\#     }
+\# }
 ...
 DATABASES = {
     'default': {
@@ -27,7 +27,7 @@ Make sure you run migrations after changing the database.
 
 You may need to uncomment the following line of the settings.py to use the rest framework interface:
 ...
-# 'rest_framework.authentication.BasicAuthentication',
+\# 'rest_framework.authentication.BasicAuthentication',
 ...
 But it may infere with the Token authentication with the bootstrap theme. Therefore after testing APIs, please recomment the above line.
 
