@@ -29,10 +29,10 @@ Make sure you run migrations after changing the database.
 
 ## Using Rest Framework Interface
 You may need to uncomment the following line of the settings.py to use the rest framework interface:
-...
-\# 'rest_framework.authentication.BasicAuthentication',
-...
-But it may infere with the Token authentication with the bootstrap theme. Therefore after testing APIs, please recomment the above line.
+```
+# 'rest_framework.authentication.BasicAuthentication',
+```
+But it may interfere with the Token authentication with the bootstrap theme. Therefore after testing APIs, recomment the above line.
 
 
 
