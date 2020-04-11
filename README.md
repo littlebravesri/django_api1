@@ -7,12 +7,12 @@ This project is to help you with the following:
 ## Database Configuration
 Using SQLite or PostgreSQL database comment/uncomment the corresponding section of the settings.py 
 ```python
-\# DATABASES = {
-\#     'default': {
-\#         'ENGINE': 'django.db.backends.sqlite3',
-\#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-\#     }
-\# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 DATABASES = {
     'default': {
