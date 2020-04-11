@@ -32,7 +32,7 @@ You may need to uncomment the following line of the settings.py to use the rest 
 ```
 # 'rest_framework.authentication.BasicAuthentication',
 ```
-But it may interfere with the Token authentication with the bootstrap theme. Therefore after testing APIs, recomment the above line.
+But, it may interfere with the token authentication used in the bootstrap theme. Therefore after testing APIs, recomment the above line.
 
 
 
