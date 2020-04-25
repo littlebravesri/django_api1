@@ -7,3 +7,7 @@ class ItemList(models.Model):
     type = models.IntegerField(default=0)
     name = models.TextField(max_length=40, null=False)
     city = models.TextField(max_length=40, null=False)
+
+    class Meta:
+        verbose_name = 'ItemList'
+        verbose_name_plural = 'ItemLists'

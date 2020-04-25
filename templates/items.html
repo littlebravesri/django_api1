@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <p>Hi there!</p>
+    <p>It works!</p>
+    <section class="charts" ng-app="app-main" ng-controller="ctrl-items">
+    <textarea id="id_text" rows="4" cols="50">
+        {% verbatim %}
+        {{ mydata }}
+        {% endverbatim %}
+    </textarea>
+        <div>
+
+        <textarea id="id_items" rows="4" cols="50">
+        {% verbatim %}
+        {{ items }}
+        {% endverbatim %}
+    </textarea>
+
+        </div>
+        <button type="button" id="id_button" ng-click="clickme()">Click Me!</button>
+    </section>
+
+</head>
+<body>
+
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-cookies.js"></script>
+<script type="application/javascript">
+
+
+    var app = angular.module('app-main', ['ngCookies']);
+    app.controller('ctrl-items', function ($scope, $http, $cookies, $window) {
+        $scope.mydata = "AA";
+        $scope.csrf_token = $cookies.get('csrftoken');
+        $scope.items = [];
+        $scope.clickme = function () {
+            //window.alert("button clicked ");
+            $scope.mydata = $scope.csrf_token;
+
+            var url = window.location.origin + '/items_u/';
+            var config = {
+                headers: {"csrftoken": $cookies.csrftoken},
+                data: {'csrfmiddlewaretoken': $scope.csrftoken},
+            };
+            $scope.get_http_data(url, config, 'items');
+            window.alert("fetched ");
+        };
+
+        $scope.get_http_data = function (url, config, varname) {
+            //    window.alert("this url" + url);
+            var next_url = null;
+            $http.get(url, config).then(function (response) {
+                if (~response.data.error) {
+                    angular.forEach(response.data['results'], function (value) {
+                        $scope[varname].push(value);
+                    });
+                    if (response.data['next'] != null) {
+                        window.alert("url next" + response.data['next']);
+                        next_url = response.data['next'];
+                        config['params'] = {'page': next_url.split('=').pop()};
+                        $scope.get_http_data(url, config, varname);
+                    }
+                };
+            });
+
+        };
+
+
+    });
+
+
+</script>

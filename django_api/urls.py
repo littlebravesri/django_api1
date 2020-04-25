@@ -23,8 +23,6 @@ router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'items', views.ItemListViewSet)
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
@@ -32,5 +30,6 @@ urlpatterns = [
     path('login', views.login),
     path('logout', views.logout),
     path('check_auth', views.check_auth),
+    #    path('post_list', views.post_list, name='post_list'),
 
 ]
