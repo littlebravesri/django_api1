@@ -8,6 +8,9 @@ class ItemList(models.Model):
     name = models.TextField(max_length=40, null=False)
     city = models.TextField(max_length=40, null=False)
 
+    def __str__(self):
+        return self.id
+
     class Meta:
         verbose_name = 'ItemList'
         verbose_name_plural = 'ItemLists'
