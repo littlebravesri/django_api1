@@ -12,22 +12,24 @@ def expires_in(token):
     left_time = settings.TOKEN_EXPIRE_TIME - time_elapsed.seconds
     return left_time
 
+
 def is_token_expired(token):
     left_time = expires_in(token)
     if left_time < 0:
         return True
     else:
         return False
-    # return expires_in(token) < timedelta(seconds = 0)
+
 
 def token_expire_handler(token):
     is_expired = is_token_expired(token)
     if is_expired:
         token.delete()
-    elif not is_expired: # time reset
-    	token.created = timezone.now() # time reset
-    	token.save() # time reset
+    elif not is_expired:  # time reset
+        token.created = timezone.now()  # time reset
+        token.save()  # time reset
     return is_expired, token
+
 
 class ExpiringTokenAuthentication(TokenAuthentication):
 
@@ -45,4 +47,4 @@ class ExpiringTokenAuthentication(TokenAuthentication):
         if is_expired:
             raise AuthenticationFailed("The Token is expired")
 
-        return (token.user, token)
+        return token.user, token
