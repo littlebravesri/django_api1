@@ -4,10 +4,10 @@
 
 This project is to help you with the following:
 1. To show how to use the Django REST framework
-2. As an independant API backend for the example bootstrap project https://github.com/DataDisca/bootstrap1
+2. As an independent API backend for the example bootstrap project https://github.com/DataDisca/bootstrap1
 
 ## Contributors
-- Token timeout : [Prabath Hetti Mudiyanselage]('https://github.com/prabathbr') (GitHUB Username: prabathbr)
+- Token timeout : [Prabath Hetti Mudiyanselage](https://github.com/prabathbr) \(GitHUB Username: prabathbr\)
 
 ## Database Configuration
 To use SQLite or PostgreSQL database comment/uncomment the corresponding section of the settings.py 
@@ -45,7 +45,7 @@ Configure `settings.py`
 
  `TOKEN_EXPIRE_TIME = 1500  # Seconds,`
 
-## Newly added feature
+## New features in this version
 - Token timeout
   
 
