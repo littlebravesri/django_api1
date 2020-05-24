@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
-    HTTP_200_OK
+    HTTP_200_OK,
 )
 
 from .models import *
@@ -33,14 +33,6 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
-
-
-@csrf_exempt
-@api_view(["POST"])
-@permission_classes((IsAuthenticated,))
-def list_users(request):
-    request.user.auth_token.delete()
-    return Response(status=HTTP_200_OK)
 
 
 @csrf_exempt
@@ -85,8 +77,3 @@ class ItemListViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
 
-# from django.shortcuts import render
-#
-#
-# def post_list(request):
-#     return render(request, 'items.html', {})
