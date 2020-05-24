@@ -7,7 +7,7 @@ This project is to help you with the following:
 2. As an independent API backend for the example bootstrap project https://github.com/DataDisca/bootstrap1
 
 ## Contributors
-- Token timeout : [Prabath Hetti Mudiyanselage](https://github.com/prabathbr) \(GitHUB Username: prabathbr\)
+- Token timeout : [Prabath Hetti Mudiyanselage](https://github.com/prabathbr) \(GitHub Username: prabathbr\)
 
 ## Database Configuration
 To use SQLite or PostgreSQL database comment/uncomment the corresponding section of the settings.py 
