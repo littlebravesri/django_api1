@@ -22,6 +22,7 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'items', views.ItemListViewSet)
+router.register(r'modelless', views.ExampleModelLessView, basename='modelless')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

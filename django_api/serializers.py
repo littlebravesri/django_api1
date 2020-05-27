@@ -19,3 +19,15 @@ class ItemListSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ItemList
         fields = ['id', 'status', 'type', 'name', 'city']
+
+
+class ExampleModelLessSerializer(serializers.Serializer):
+    project_name = serializers.CharField()
+    total_head_count = serializers.IntegerField()
+    start_date = serializers.DateTimeField()
+    location = serializers.CharField()
+
+
+
+
+

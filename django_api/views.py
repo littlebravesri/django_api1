@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User, Group
 from django.views.decorators.csrf import csrf_exempt
@@ -11,10 +12,11 @@ from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
     HTTP_200_OK,
+    HTTP_201_CREATED,
 )
 
 from .models import *
-from .serializers import UserSerializer, GroupSerializer, ItemListSerializer
+from .serializers import UserSerializer, GroupSerializer, ItemListSerializer, ExampleModelLessSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -75,5 +77,34 @@ class ItemListViewSet(viewsets.ModelViewSet):
     queryset = ItemList.objects.all().order_by('id')
     serializer_class = ItemListSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+
+class ExampleModelLessView(viewsets.ViewSet):
+    """
+    A model-less API example
+    A model-less API can be used when saving to a database is not necessary or data need additional processing
+    """
+
+    serializer_class = ExampleModelLessSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def list(self, request):
+        data = {
+            'project_name': 'DataDisca Django Example',
+            'total_head_count': 10,
+            'start_date': datetime(2020, 5, 27),
+            'location': 'Melbourne, Australia'
+        }
+        my_serializer = ExampleModelLessSerializer(data=data)
+        if my_serializer.is_valid():
+            return Response(my_serializer.data)
+        else:
+            return Response({'error': 'invalid data'})
+
+    def create(self,request):
+        data = request.data.dict()
+        print(data)
+        return Response(status=HTTP_201_CREATED)
+
 
 

@@ -9,7 +9,7 @@ class ItemList(models.Model):
     city = models.TextField(max_length=40, null=False)
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
     class Meta:
         verbose_name = 'ItemList'
