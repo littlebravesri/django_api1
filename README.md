@@ -53,7 +53,7 @@ Follow the steps given below to configure that.
         ``` cd <your path> ```
     1. Change the following to suit your Django installation  
         ``` Change 0.0.0.0:8000 to suit your listening IP and port ```  
-        ```Change django.log to your preferred logfile location. Using this default is a bad idea as it would fill up your Django folder```
+        ```Change django.log to your preferred logfile location. Using this default is a bad idea as it would fill up your Django folder.```
 
 1. Create a cron entry:
 ```
