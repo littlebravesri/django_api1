@@ -4,7 +4,7 @@
 cd /d/data/dd_projects/django_api;
 
 
-x=`ps -ef | grep -i django | grep -v grep | grep runserver | wc -l`
+x=`ps -ef | grep -i django | grep runserver | grep -v grep | wc -l`
 
 if [ "$x" -lt "1" ]
 then
