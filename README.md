@@ -46,8 +46,8 @@ Configure `settings.py`
  `TOKEN_EXPIRE_TIME = 1500  # Seconds,`
 
 ## Starting Django Automatically 
-In production environments, Django should automatically start When the machine starts or reboots.
-Follow the steps given below. 
+In production environments, Django should automatically start when the machine starts or reboots.
+Follow the steps given below to configure that. 
 1. Modify the script [start_django.sh](./start_django.sh) for your environment.
     1. Configure the path of your Django installation  
         ``` cd <your path> ```
