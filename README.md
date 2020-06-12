@@ -49,11 +49,11 @@ Configure `settings.py`
 In production environments, Django should automatically start When the machine starts or reboots.
 Follow the steps given below. 
 1. Modify the script [start_django.sh](./start_django.sh) for your environment.
-    1. Configure the path of path your Django installation  
+    1. Configure the path of your Django installation  
         ``` cd <your path> ```
-    1. Change the following path to suit your Django installation  
+    1. Change the following to suit your Django installation  
         ``` Change 0.0.0.0:8000 to suit your listening IP and port ```  
-        ```Change django.log to your logfile location. Using this default is a bad idea. The default would fill up your Django folder```
+        ```Change django.log to your preferred logfile location. Using this default is a bad idea as it would fill up your Django folder```
 
 1. Create a cron entry:
 ```
