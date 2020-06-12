@@ -45,8 +45,26 @@ Configure `settings.py`
 
  `TOKEN_EXPIRE_TIME = 1500  # Seconds,`
 
+## Starting Django Automatically 
+In production environments, Django should automatically start When the machine starts or reboots.
+Follow the steps given below. 
+1. Modify the script [start_django.sh](./start_django.sh) for your environment.
+    1. Configure the path of path your Django installation  
+        ``` cd <your path> ```
+    1. Change the following path to suit your Django installation  
+        ``` Change 0.0.0.0:8000 to suit your listening IP and port ```  
+        ```Change django.log to your logfile location. Using this default is a bad idea. The default would fill up your Django folder```
+
+1. Create a cron entry:
+```
+*/5 * * * * /usr/bin/sh /d/data/dd_projects/django_api/start_django.sh &
+ ``` 
+The cron job will run every 5 minutes. It will check if the Django is running. 
+If not it will start Django. 
+You can change the interval to different value for your requirement.
+
 ## New features in this version
-- Token timeout
+- Starting Django automatically
   
 
 ## Sponsor
