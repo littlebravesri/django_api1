@@ -76,8 +76,12 @@ You can configure the following.
 1. Log levels
 1. Date and log formats  
 
-## New features in this version
+## Features
+
+- Logging to Files (new)
 - Starting Django automatically
+
+new = most recently added features 
   
 
 ## Sponsor
