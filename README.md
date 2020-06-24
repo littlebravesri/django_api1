@@ -63,6 +63,19 @@ The cron job will run every 5 minutes. It will check if the Django is running.
 If not it will start Django. 
 You can change the interval to different value for your requirement.
 
+## Logging to Files
+Added file and console logging configurations.
+Check the following in [settings.py](./django_api/settings.py).
+```
+LOGGING = {
+    ...
+}
+```
+You can configure the following.
+1. Writing logs to console, files or both
+1. Log levels
+1. Date and log formats  
+
 ## New features in this version
 - Starting Django automatically
   
