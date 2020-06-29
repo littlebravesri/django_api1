@@ -66,7 +66,7 @@ You can change the interval to different value for your requirement.
 ## Logging to Files
 Added file and console logging configurations.
 Check the following in [settings.py](./django_api/settings.py).
-```
+```python
 LOGGING = {
     ...
 }
