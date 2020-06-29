@@ -1,0 +1,8 @@
+Watching for file changes with StatReloader
+Not Found: /login
+[21/Jun/2020 15:53:48] "POST /login HTTP/1.0" 404 31
+Not Found: /login
+[21/Jun/2020 15:53:54] "POST /login HTTP/1.0" 404 31
+[21/Jun/2020 15:54:03] "POST /login HTTP/1.0" 200 52
+Unauthorized: /check_auth
+[21/Jun/2020 15:54:03] "POST /check_auth HTTP/1.0" 401 33

@@ -49,7 +49,7 @@ LOGGING = {
     'handlers': {
         'file': {
             'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': 'logs/debug.log',
             'formatter': 'verbose',
         },
@@ -57,13 +57,23 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
+        'requestlogs_to_file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': 'logs/requestlogs.log',
+        },
     },
     'loggers': {
         'django': {
             'handlers': ['file','console'],
-            'level': 'DEBUG',
+            'level': 'INFO',
             'propagate': True,
             'formatter': 'verbose',
+        },
+    'requestlogs': {
+            'handlers': ['requestlogs_to_file'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
@@ -92,7 +102,8 @@ REST_FRAMEWORK = {
 
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',)
+        'rest_framework.permissions.IsAuthenticated',),
+    'EXCEPTION_HANDLER': 'requestlogs.views.exception_handler',
 }
 
 MIDDLEWARE = [
@@ -103,6 +114,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'requestlogs.middleware.RequestLogsMiddleware',
 ]
 
 ROOT_URLCONF = 'django_api.urls'

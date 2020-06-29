@@ -76,9 +76,13 @@ You can configure the following.
 1. Log levels
 1. Date and log formats  
 
+Note: Install `django-requestlogs` for json logging  
+    ``` pip install django-requestlogs ```
+
 ## Features
 
-- Logging to Files (new)
+- Json API request and response logging (new)
+- Logging to Files 
 - Starting Django automatically
 
 new = most recently added features 
