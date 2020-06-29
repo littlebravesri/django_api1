@@ -57,7 +57,7 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
-        'requestlogs_to_file': {
+        'requestlogs_to_file': {  # For Json API Logging
             'level': 'INFO',
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'filename': 'logs/requestlogs.log',
@@ -70,7 +70,7 @@ LOGGING = {
             'propagate': True,
             'formatter': 'verbose',
         },
-    'requestlogs': {
+    'requestlogs': { # For Json API Logging
             'handlers': ['requestlogs_to_file'],
             'level': 'INFO',
             'propagate': False,

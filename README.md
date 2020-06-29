@@ -71,13 +71,22 @@ LOGGING = {
     ...
 }
 ```
+
+##### Json API Logging
+Install `django-requestlogs` for json logging  
+    ``` pip install django-requestlogs ```
+
+Configure
+```python
+    MIDDLEWARE = [
+    # Your other middleware
+    'requestlogs.middleware.RequestLogsMiddleware',
+    ]
+```
 You can configure the following.
 1. Writing logs to console, files or both
 1. Log levels
 1. Date and log formats  
-
-Note: Install `django-requestlogs` for json logging  
-    ``` pip install django-requestlogs ```
 
 ## Features
 
