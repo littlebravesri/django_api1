@@ -44,7 +44,6 @@ def logout(request):
     request.user.auth_token.delete()
     return Response(status=HTTP_200_OK)
 
-
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((IsAuthenticated,))
