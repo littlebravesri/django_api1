@@ -1,9 +1,5 @@
-import csv
-import sqlite3
 import re
 from django.http import HttpResponse
-
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView
@@ -14,7 +10,7 @@ from .serializer import TypeSerializer, DatasetSerializer
 def index(request):
     return HttpResponse("HEllo World")
 
-class Analysis(ListAPIView):
+class ModelLessAPI(ListAPIView):
     queryset = Type.objects.all() #filter(correlation="pearson")
     serializer_class = TypeSerializer
 
@@ -39,24 +35,69 @@ class Analysis(ListAPIView):
 
     def post(self, request, format=None):
         serializer = TypeSerializer(data=request.data)
-
         if serializer.is_valid():
             x = re.search("pearson", str(serializer.data))
             if x:
-                return Response("pearson correlation", status=200)
+                return Response("pearson", status=200)
             else:
-                return Response("spearman correlation", status=200)
-
-            # conn = None
-            # conn = sqlite3.connect('db')
-            # cur = conn.cursor()
-            # cur.execute("SELECT * FROM analysis_dataset")
-            #
-            # rows = cur.fetchall()
-            #
-            # for row in rows:
-            #     print(row)
-            #pearsoncorr = Dataset.corr(method='pearson')
-            #return Response(a, status=200) #status.HTTP_201_CREATED    serializer.data
+                return Response("spearman", status=200)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+class ModelBasedAPI(ListAPIView):
+    queryset = Dataset.objects.all()
+    serializer_class = DatasetSerializer
+    def post(self, request):
+        serializer = DatasetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class ModelBasedAPI_ID(ListAPIView):
+    queryset = Dataset.objects.all()
+    serializer_class = DatasetSerializer
+
+
+    def post(self, request):
+        serializer = DatasetSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def get(self, request, id):
+        try:
+            model = Dataset.objects.get(id=id)
+        except Dataset.DoesNotExist:
+            return Response("Product not found")
+        serializer = DatasetSerializer(model)
+        return Response(serializer.data)
+
+
+    def put(self, request, id):
+        try:
+            queryset = Dataset.objects.get(id=id)
+        except Dataset.DoesNotExist:
+            return Response("Product does not exist", status=status.HTTP_404_NOT_FOUND)
+        serializer = DatasetSerializer(queryset, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=200)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def delete(self, instance, id):
+        try:
+            queryset = Dataset.objects.get(id=id)
+        except Dataset.DoesNotExist:
+            return Response("Product does not exist", status=status.HTTP_404_NOT_FOUND)
+        queryset.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

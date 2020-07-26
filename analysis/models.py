@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-#
+
 class Type(models.Model):
     correlation = models.CharField(max_length=40, null=False)
 
