@@ -1,6 +1,6 @@
 import csv
 import sqlite3
-
+import re
 from django.http import HttpResponse
 
 from rest_framework.views import APIView
@@ -14,7 +14,7 @@ from .serializer import TypeSerializer, DatasetSerializer
 def index(request):
     return HttpResponse("HEllo World")
 
-class AllTech(ListAPIView):
+class Analysis(ListAPIView):
     queryset = Type.objects.all() #filter(correlation="pearson")
     serializer_class = TypeSerializer
 
@@ -41,13 +41,11 @@ class AllTech(ListAPIView):
         serializer = TypeSerializer(data=request.data)
 
         if serializer.is_valid():
-            if serializer.data is "pearson":
-                #serializer.save()
-                a = 2+9
-                return Response(a, status=200)
+            x = re.search("pearson", str(serializer.data))
+            if x:
+                return Response("pearson correlation", status=200)
             else:
-                a = 0
-                return Response(a, status=200)
+                return Response("spearman correlation", status=200)
 
             # conn = None
             # conn = sqlite3.connect('db')
