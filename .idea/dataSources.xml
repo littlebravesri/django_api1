@@ -23,5 +23,17 @@
         </library>
       </libraries>
     </data-source>
+    <data-source source="LOCAL" name="SQLite - product_a.csv" uuid="e9243c12-999d-4f50-abdc-a7663a3ac035">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/Downloads/Data Disca/product_a.csv</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="product_a.csv" uuid="fd6b5ee5-eeb2-4735-8730-6ffe911dfe38">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$USER_HOME$/Downloads/Data Disca/product_a.csv</jdbc-url>
+    </data-source>
   </component>
 </project>

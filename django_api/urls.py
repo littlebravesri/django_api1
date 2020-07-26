@@ -33,4 +33,8 @@ urlpatterns = [
     path('check_auth', views.check_auth),
     #    path('post_list', views.post_list, name='post_list'),
 
+
+    # Made changes
+   path('analysis/', include('analysis.urls')),
+
 ]

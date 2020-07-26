@@ -73,7 +73,7 @@ class ItemListViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows items to be viewed or edited.
     """
-    queryset = ItemList.objects.all().order_by('id')
+    queryset = ItemList.objects.all()
     serializer_class = ItemListSerializer
     permission_classes = [permissions.IsAuthenticated]
 
