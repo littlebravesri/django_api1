@@ -1,46 +1,39 @@
-import re
+import re, csv
+import sqlite3
+
 from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.generics import ListAPIView
 from .models import Type, Dataset
 from .serializer import TypeSerializer, DatasetSerializer
+import pandas as pd
+
 # Create your views here.
 
 def index(request):
-    return HttpResponse("HEllo World")
+    return HttpResponse("Hello World")
 
 class ModelLessAPI(ListAPIView):
-    queryset = Type.objects.all() #filter(correlation="pearson")
+    queryset = Type.objects.all()
     serializer_class = TypeSerializer
 
-    # dataset = Dataset()
-    #
-    # dataReader = csv.reader(open('analysis/product_a.csv'), delimiter=',', quotechar='"')
-    # for row in dataReader:
-    #     dataset.date_w = row[1]
-    #     dataset.price = row[2]
-    #     dataset.total_vol = row[3]
-    #     dataset.plu1 = row[4]
-    #     dataset.plu2 = row[5]
-    #     dataset.plu3 = row[6]
-    #     dataset.bags_t = row[7]
-    #     dataset.bags_s = row[8]
-    #     dataset.bags_l = row[9]
-    #     dataset.bags_lx = row[10]
-    #     dataset.type = row[11]
-    #     dataset.year = row[12]
-    #     dataset.location = row[13]
-    #     dataset.save()
-
     def post(self, request, format=None):
+        content_type = 'application/xml'
         serializer = TypeSerializer(data=request.data)
+
+        con = sqlite3.connect("db.sqlite3")
+        df = pd.read_sql_query("SELECT * from analysis_dataset", con)
+        con.close()
+
         if serializer.is_valid():
             x = re.search("pearson", str(serializer.data))
             if x:
-                return Response("pearson", status=200)
+                pearson = df.corr(method='pearson')
+                return Response(pearson, status=200)
             else:
-                return Response("spearman", status=200)
+                spearman = df.corr(method='spearman')
+                return Response(spearman, status=200)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

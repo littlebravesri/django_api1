@@ -8,6 +8,7 @@ class Type(models.Model):
     def __str__(self):
         return str(self.name)
 
+
 class Dataset(models.Model):
     date_w = models.TextField(max_length=40, null=False)
     price = models.FloatField(max_length=40, null=False)

@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Django default" uuid="73113b74-cd6f-4519-b1fd-cb76e57165cb">
-      <driver-ref>postgresql</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/django_api/settings.py</remarks>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/dj_api</jdbc-url>
-    </data-source>
     <data-source source="LOCAL" name="db" uuid="58a1b4b1-1364-449d-9f64-3334b9a97dcf">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
@@ -34,6 +26,14 @@
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:$USER_HOME$/Downloads/Data Disca/product_a.csv</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Django default" uuid="4bcb8ce4-cddc-4164-a9df-b698cef3bff6">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/django_api/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\srisa\PycharmProjects\django_api1\db.sqlite3</jdbc-url>
     </data-source>
   </component>
 </project>
