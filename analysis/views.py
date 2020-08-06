@@ -1,10 +1,9 @@
-import json
-import re, csv
+import re
 import sqlite3
 
 from django.http import HttpResponse
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, viewsets, mixins
 from rest_framework.generics import ListAPIView
 from .models import Type, Dataset
 from .serializer import TypeSerializer, DatasetSerializer
@@ -13,9 +12,15 @@ import pandas as pd
 
 # Create your views here.
 
-class ModelLessAPI(ListAPIView):
+#class ModelLessAPI(ListAPIView):
+class ModelLessAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
+
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
+
+    @classmethod
+    def get_extra_actions(cls):
+        return []
 
     def post(self, request):
         serializer = TypeSerializer(data=request.data)
@@ -37,9 +42,15 @@ class ModelLessAPI(ListAPIView):
         return Response("Invalid Correlation", status=status.HTTP_400_BAD_REQUEST)
 
 
-class ModelBasedAPI(ListAPIView):
+#class ModelBasedAPI(ListAPIView):
+class ModelBasedAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
+
     queryset = Dataset.objects.all()
     serializer_class = DatasetSerializer
+
+    @classmethod
+    def get_extra_actions(cls):
+        return []
 
     def post(self, request):
         serializer = DatasetSerializer(data=request.data)
@@ -48,6 +59,8 @@ class ModelBasedAPI(ListAPIView):
             return Response(serializer.data, status=200)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 
 class ModelBasedAPI_ID(ListAPIView):

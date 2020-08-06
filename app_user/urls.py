@@ -1,7 +1,8 @@
-from django.conf.urls import url
 from django.urls import path
-import app_user.views
+from app_user.views import  *
+
+AppUser = AppUserAPI.as_view({'post': 'create'})
 
 urlpatterns = [
-    path(r'', app_user.views.AppUserAPI.as_view()),
+    path(r'', AppUser),
 ]

@@ -1,16 +1,20 @@
 import sqlite3
 
 from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.generics import ListAPIView
+from rest_framework import status, viewsets, mixins
 from .models import User
 from .serializer import UserSerializer
 import pandas as pd
+
 # Create your views here.
 
-class AppUserAPI(ListAPIView):
+class AppUserAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    @classmethod
+    def get_extra_actions(cls):
+        return []
 
     def post(self, request):
         serializer = UserSerializer(data=request.data)

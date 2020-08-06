@@ -1,21 +1,27 @@
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, include
 from rest_framework import routers
 
-import analysis.views
+from analysis.views import *
 
-# router = routers.DefaultRouter()
-# router.register(r'analysis/', analysis.views.ModelLessAPI)
-# router.register(r'modelbasedapi/', analysis.views.ModelBasedAPI)
+
 router = routers.DefaultRouter()
-#router.register(r'', views.VocabViewSet, 'vocabs')
-#router.register(r'modellessapi/', views.TermViewSet, 'terms')
-#router.register(r'modelbasedapi/', views.DisciplineViewSet, 'disciplines')
+router.register(r'modellessapi', ModelLessAPI, basename="modellessapi")
+router.register(r'modelbasedapi', ModelBasedAPI, basename="modelbasedapi")
+
+mlapi = ModelLessAPI.as_view({'post': 'create'})
+mbapi = ModelBasedAPI.as_view({'post': 'create'})
 
 urlpatterns = [
-    #path(r'', analysis.views.analysisAPI),
-    path(r'modellessapi/', analysis.views.ModelLessAPI.as_view()),
-    path(r'modelbasedapi/', analysis.views.ModelBasedAPI.as_view()),
-    url(r'^modelbasedapi/(?P<id>\d+)/$', analysis.views.ModelBasedAPI_ID.as_view(), name='mbapi'),
+    path(r'', include(router.urls)),
+    url(r'^modelbasedapi/(?P<id>\d+)/$', ModelBasedAPI_ID.as_view(), name='mbapiid'),
 ]
+
+#
+# urlpatterns = [
+#     #path(r'', include(router.urls)),
+#     path(r'modellessapi/', ModelLessAPI.as_view()),
+#     path(r'modelbasedapi/', ModelBasedAPI.as_view()),
+#     url(r'^modelbasedapi/(?P<id>\d+)/$', ModelBasedAPI_ID.as_view(), name='mbapi'),
+# ]
 

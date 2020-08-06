@@ -16,15 +16,22 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+
 from . import views
-import analysis
+
+from app_user.views import AppUserAPI
+from analysis.urls import router
+import analysis.views
+# import analysis
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'items', views.ItemListViewSet)
 router.register(r'modelless', views.ExampleModelLessView, basename='modelless')
-#router.register(r'analysis', viewset = include('analysis.urls'), basename='analysis')
+router.register(r'analysis/modellessapi', analysis.views.ModelLessAPI, basename='analysismlapi')
+router.register(r'analysis/modelbasedapi', analysis.views.ModelBasedAPI, basename='analysismbapi')
+router.register(r'app_user', AppUserAPI, basename='appuser')
 
 
 urlpatterns = [
