@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from . import views
+import analysis
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'groups', views.GroupViewSet)
 router.register(r'items', views.ItemListViewSet)
 router.register(r'modelless', views.ExampleModelLessView, basename='modelless')
+#router.register(r'analysis', viewset = include('analysis.urls'), basename='analysis')
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
