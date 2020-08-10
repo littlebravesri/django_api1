@@ -1,6 +1,7 @@
 import re
 import sqlite3
 from django.http import HttpResponse
+from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework import status, viewsets, mixins
 from rest_framework.generics import ListAPIView
@@ -36,7 +37,8 @@ class ModelLessAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
             x = re.search("pearson", str(serializer.data))
             if re.search("pearson", str(serializer.data)):
                 pearson = df.corr(method='pearson')
-                return HttpResponse([str(pearson), "Pearson Correlation"], status=status.HTTP_202_ACCEPTED, content_type="application/json")
+                return render(pearson, 'correlation.html', {'correlation': pearson})
+               # return HttpResponse([str(pearson), "Pearson Correlation"], status=status.HTTP_202_ACCEPTED, content_type="application/json")
             elif re.search("spearman", str(serializer.data)):
                 spearman = df.corr(method='spearman')
                 return HttpResponse([str(spearman), "Spearman Correlation"], status=status.HTTP_202_ACCEPTED, content_type="text/json")
