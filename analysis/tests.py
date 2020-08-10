@@ -1,3 +1,11 @@
-from django.test import TestCase
+# from django.test import TestCase
+import pytest
 
-# Create your tests here.
+"""
+test PyTest 
+"""
+
+@pytest.fixture
+def test_correlation():
+    print ("abcdefgh")
+    assert "abc" == "abc"

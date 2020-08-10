@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from analysis.models import Type, Dataset
 
+# Serializing models
+
 class TypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Type

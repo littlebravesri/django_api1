@@ -1,6 +1,11 @@
 from django.db import models
 
 # Create your models here.
+
+"""
+Model to input username, current password and new password
+"""
+
 class User(models.Model):
     username = models.CharField(max_length=40, null=False)
     currentPassword = models.CharField(max_length=40, null=False)

@@ -1,6 +1,13 @@
 from django.db import models
 
 # Create your models here.
+"""
+'Type' model take in the correlation required
+
+'Dataset' model is to read the csv file into the database and 
+perform the necessary CRUD and coreelation calculation operation
+
+"""
 
 class Type(models.Model):
     correlation = models.CharField(max_length=40, null=False)

@@ -1,6 +1,5 @@
 import re
 import sqlite3
-
 from django.http import HttpResponse
 from rest_framework.response import Response
 from rest_framework import status, viewsets, mixins
@@ -12,7 +11,11 @@ import pandas as pd
 
 # Create your views here.
 
-#class ModelLessAPI(ListAPIView):
+"""
+Model-less API to perform finding the correlation
+Model-Based API to GET, PUT, POST and DELETE rows into the database
+"""
+
 class ModelLessAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     queryset = Type.objects.all()
@@ -33,16 +36,16 @@ class ModelLessAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
             x = re.search("pearson", str(serializer.data))
             if re.search("pearson", str(serializer.data)):
                 pearson = df.corr(method='pearson')
-                return HttpResponse([str(pearson), "Pearson Correlation"], status=200, content_type= "text/json")
+                return HttpResponse([str(pearson), "Pearson Correlation"], status=status.HTTP_202_ACCEPTED, content_type="application/json")
             elif re.search("spearman", str(serializer.data)):
                 spearman = df.corr(method='spearman')
-                return HttpResponse([str(spearman), "Spearman Correlation"], status=200, content_type= "text/json")
+                return HttpResponse([str(spearman), "Spearman Correlation"], status=status.HTTP_202_ACCEPTED, content_type="text/json")
             else:
                 Response("Invalid Correlation", status=status.HTTP_400_BAD_REQUEST)
         return Response("Invalid Correlation", status=status.HTTP_400_BAD_REQUEST)
 
 
-#class ModelBasedAPI(ListAPIView):
+
 class ModelBasedAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
 
     queryset = Dataset.objects.all()
@@ -56,7 +59,7 @@ class ModelBasedAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
         serializer = DatasetSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=200)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -71,17 +74,19 @@ class ModelBasedAPI_ID(ListAPIView):
         serializer = DatasetSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=200)
+            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
     def get(self, request, id):
         try:
             model = Dataset.objects.get(id=id)
         except Dataset.DoesNotExist:
-            return Response("Product not found")
+            return Response("Product not found", status=status.HTTP_404_NOT_FOUND)
         serializer = DatasetSerializer(model)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
     def put(self, request, id):
         try:
@@ -91,9 +96,10 @@ class ModelBasedAPI_ID(ListAPIView):
         serializer = DatasetSerializer(queryset, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=200)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
     def delete(self, instance, id):
         try:
@@ -102,3 +108,4 @@ class ModelBasedAPI_ID(ListAPIView):
             return Response("Product does not exist", status=status.HTTP_404_NOT_FOUND)
         queryset.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+

@@ -12,9 +12,10 @@ import pytest
 import requests
 from time import sleep
 
+
 BASE_URL = "http://127.0.0.1:8000/"
-USERNAME = 'tlk'
-PASSWORD = 'tlk12345'
+USERNAME = 'srisainee'
+PASSWORD = 'abc123'
 
 
 @pytest.fixture(scope="module", name="auth_paras")
@@ -50,7 +51,7 @@ def test_login(auth_paras):
 def test_items(auth_paras):
     url = BASE_URL + 'items/'
     headers = {
-        'Authorization': 'Token ' + auth_paras.token
+        'Authorization': 'Token ' + '7a18ab86257955ebed1450f47450783c1593d114'
     }
     kwargs = {
         "headers": headers
@@ -108,3 +109,12 @@ def test_logout(auth_paras):
         assert True
         return
     assert False
+
+
+
+
+@pytest.fixture
+def test_correlation():
+    print ("abcdefgh")
+    print(corName)
+    assert "abc" == "abc"

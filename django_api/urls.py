@@ -17,12 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 
+import analysis.views
 from . import views
 
 from app_user.views import AppUserAPI
-from analysis.urls import router
-import analysis.views
-# import analysis
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -33,8 +31,7 @@ router.register(r'analysis/modellessapi', analysis.views.ModelLessAPI, basename=
 router.register(r'analysis/modelbasedapi', analysis.views.ModelBasedAPI, basename='analysismbapi')
 router.register(r'app_user', AppUserAPI, basename='appuser')
 
-
-urlpatterns = [
+urlpatterns = (
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
@@ -46,4 +43,6 @@ urlpatterns = [
     path('analysis/', include('analysis.urls')),
     path('app_user/', include('app_user.urls')),
 
-]
+)
+
+

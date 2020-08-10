@@ -8,6 +8,11 @@ import pandas as pd
 
 # Create your views here.
 
+"""
+View to input values from the user, check the database for occurance of the input and 
+perform appropriate operations to change the password
+"""
+
 class AppUserAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -35,7 +40,7 @@ class AppUserAPI(mixins.ListModelMixin, viewsets.GenericViewSet):
                     serializer.validated_data['currentPassword'] = serializer.validated_data['newPassword']
                     serializer.validated_data['newPassword'] = ""
                     serializer.save()
-                    return Response("Password changed successfully", status=200)
+                    return Response("Password changed successfully", status=status.HTTP_200_OK)
                 else:
                     return Response("Current Password does not match", status=status.HTTP_400_BAD_REQUEST)
             else:
